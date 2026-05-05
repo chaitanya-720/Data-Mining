@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 1 – Basics of Data Mining</title>
+  <meta name="description" content="Unit 1: Basics of Data Mining – definitions, types of data, patterns, architecture, and analysis techniques." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE WRAPPER ===== -->
+  <div class="page-wrapper">
+
+    <!-- Unit Header -->
+    <header class="unit-header">
+      <div class="unit-label">UNIT 1</div>
+      <h1>Basics of Data Mining</h1>
+      <p>Foundations, data types, patterns, and analysis techniques</p>
+    </header>
+
+    <div class="container">
+
+      <!-- Search -->
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#what-is-data-mining">1.1 What is Data Mining</a></li>
+          <li><a href="#kinds-of-data">1.2 Kinds of Data</a></li>
+          <li><a href="#pattern-mining">1.3 Pattern Mining</a></li>
+          <li><a href="#analysis">1.4 Analysis</a></li>
+        </ol>
+      </nav>
+
+      <!-- 1.1 What is Data Mining -->
+      <section class="section-card" id="what-is-data-mining" aria-labelledby="h-wdm">
+        <h2 id="h-wdm"><span class="section-icon">🔍</span> 1.1 What is Data Mining</h2>
+
+        <h3>Definition</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Data Mining is the process of <strong>discovering patterns, correlations, anomalies, and useful insights</strong> from large datasets using statistical, mathematical, and machine learning techniques.
+        </div>
+        <p>Also called <strong>Knowledge Discovery in Databases (KDD)</strong>, data mining involves extracting hidden, previously unknown, and potentially useful information from data.</p>
+        <div class="example-box">A supermarket analyses millions of purchase records to discover that customers who buy diapers also tend to buy beer on Friday evenings.</div>
+
+        <h3 id="issues-challenges">Issues and Challenges</h3>
+        <ul>
+          <li><strong>Scalability:</strong> Algorithms must handle terabytes or petabytes of data efficiently.</li>
+          <li><strong>High Dimensionality:</strong> Datasets may have thousands of attributes; irrelevant ones add noise.</li>
+          <li><strong>Heterogeneous &amp; Complex Data:</strong> Text, images, sequences, graphs — not just tables.</li>
+          <li><strong>Data Quality:</strong> Missing values, duplicates, and noise degrade results.</li>
+          <li><strong>Privacy &amp; Security:</strong> Mining sensitive data risks exposing personal information.</li>
+          <li><strong>Pattern Evaluation:</strong> Distinguishing genuinely useful patterns from spurious correlations.</li>
+          <li><strong>Efficiency:</strong> Real-time or near-real-time processing requirements.</li>
+        </ul>
+
+        <h3 id="applications">Applications</h3>
+        <ul>
+          <li><strong>Retail &amp; E-commerce:</strong> Market basket analysis, recommendation engines.</li>
+          <li><strong>Finance &amp; Banking:</strong> Credit scoring, fraud detection.</li>
+          <li><strong>Healthcare:</strong> Disease prediction, drug discovery, patient outcome analysis.</li>
+          <li><strong>Telecommunications:</strong> Churn prediction, network intrusion detection.</li>
+          <li><strong>Web Mining:</strong> Click-stream analysis, personalised ads.</li>
+          <li><strong>Science:</strong> Astronomy (classifying stars), genomics (gene expression).</li>
+        </ul>
+      </section>
+
+      <!-- 1.2 Kinds of Data -->
+      <section class="section-card" id="kinds-of-data" aria-labelledby="h-kod">
+        <h2 id="h-kod"><span class="section-icon">🗃️</span> 1.2 Kinds of Data</h2>
+
+        <h3>Database Data</h3>
+        <p>Structured data stored in <strong>Relational Databases (RDBMS)</strong> — organised in tables with rows (records) and columns (attributes). SQL is used to query and manipulate it.</p>
+        <div class="example-box">A student database with tables for Students, Courses, and Grades.</div>
+
+        <h3>Data Warehouses</h3>
+        <p>A <strong>data warehouse</strong> is a subject-oriented, integrated, time-variant, and non-volatile collection of data used to support management decision-making.</p>
+        <ul>
+          <li>Data is collected from multiple sources, cleaned, and stored.</li>
+          <li>Supports OLAP (Online Analytical Processing) queries.</li>
+          <li>Contains historical data for trend analysis.</li>
+        </ul>
+        <div class="example-box">A retail chain consolidates sales data from all branches into one warehouse to analyse monthly trends.</div>
+
+        <h3>Transactional Data</h3>
+        <p>Records of <strong>individual transactions</strong> or events. Each record represents one transaction and a list of items/actions involved.</p>
+        <div class="example-box">A grocery store receipt listing {bread, butter, eggs, milk} bought in a single visit.</div>
+
+        <h3>Other Types of Data</h3>
+        <ul>
+          <li><strong>Time-series &amp; Sequence Data:</strong> Stock prices, sensor readings over time.</li>
+          <li><strong>Spatial Data:</strong> Maps, GPS coordinates, geographic information.</li>
+          <li><strong>Text &amp; Multimedia:</strong> Documents, images, audio, video.</li>
+          <li><strong>Graph &amp; Network Data:</strong> Social networks, web graphs, biological networks.</li>
+          <li><strong>Stream Data:</strong> Continuous real-time data (e.g., Twitter feeds, IoT sensors).</li>
+        </ul>
+
+        <h3 id="architecture">Architecture of Data Mining</h3>
+        <p>A typical data mining system consists of the following components:</p>
+        <ol>
+          <li><strong>Data Sources:</strong> Databases, data warehouses, flat files, web data.</li>
+          <li><strong>Data Preprocessing Module:</strong> Cleans, integrates, and transforms raw data.</li>
+          <li><strong>Data Mining Engine:</strong> Core algorithms — association, classification, clustering, etc.</li>
+          <li><strong>Pattern Evaluation:</strong> Identifies truly interesting patterns using interestingness measures.</li>
+          <li><strong>Knowledge Base:</strong> Domain knowledge used to guide and filter the search.</li>
+          <li><strong>User Interface:</strong> Visualization and interaction for analysts.</li>
+        </ol>
+      </section>
+
+      <!-- 1.3 Pattern Mining -->
+      <section class="section-card" id="pattern-mining" aria-labelledby="h-pm">
+        <h2 id="h-pm"><span class="section-icon">📐</span> 1.3 Pattern Mining</h2>
+
+        <h3>Characterization and Discrimination</h3>
+        <h4>Data Characterization</h4>
+        <p>Summarizes the <strong>general characteristics</strong> of a target class of data.</p>
+        <div class="example-box">Summarize the profile of high-value customers (e.g., average age, income, purchase frequency).</div>
+
+        <h4>Data Discrimination</h4>
+        <p>Compares the general features of a target class against one or more <strong>contrasting classes</strong>.</p>
+        <div class="example-box">Compare features of customers who churned vs. those who didn't.</div>
+
+        <h3>Frequent Patterns</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          A <strong>frequent pattern</strong> is a pattern (items, subsequences, substructures) that appears in a dataset with frequency ≥ a minimum support threshold.
+        </div>
+        <ul>
+          <li><strong>Itemset:</strong> A set of items, e.g., {bread, butter}.</li>
+          <li><strong>Support:</strong> Fraction of transactions containing the pattern.</li>
+          <li><strong>Apriori Algorithm:</strong> Classic algorithm for mining frequent itemsets.</li>
+        </ul>
+
+        <h3>Association and Correlation</h3>
+        <div class="definition-box">
+          <strong>Association Rule</strong>
+          An implication of the form X → Y (if X is bought, Y is likely bought too). Measured by <em>support</em>, <em>confidence</em>, and <em>lift</em>.
+        </div>
+        <div class="code-block">Support(X→Y)    = P(X ∪ Y)
+Confidence(X→Y) = P(Y | X) = Support(X∪Y) / Support(X)
+Lift(X→Y)       = Confidence(X→Y) / Support(Y)</div>
+        <div class="example-box">Bread → Butter [support=30%, confidence=75%] — 75% of bread buyers also buy butter.</div>
+
+        <h3>Classification and Regression</h3>
+        <h4>Classification</h4>
+        <p>Maps data items to predefined <strong>categorical classes</strong> (discrete labels).</p>
+        <div class="example-box">Classifying emails as "Spam" or "Not Spam".</div>
+
+        <h4>Regression</h4>
+        <p>Predicts a <strong>continuous numerical value</strong> for a data item.</p>
+        <div class="example-box">Predicting the selling price of a house based on area, location, and number of rooms.</div>
+      </section>
+
+      <!-- 1.4 Analysis -->
+      <section class="section-card" id="analysis" aria-labelledby="h-anal">
+        <h2 id="h-anal"><span class="section-icon">📊</span> 1.4 Analysis</h2>
+
+        <h3>Cluster Analysis</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Clustering groups data objects into <strong>clusters</strong> such that objects in the same cluster are similar, and objects in different clusters are dissimilar — without using predefined class labels.
+        </div>
+        <ul>
+          <li>Unsupervised learning method.</li>
+          <li>Similarity is measured using distance metrics (Euclidean, Manhattan, etc.).</li>
+          <li>Algorithms: K-means, DBSCAN, hierarchical clustering.</li>
+        </ul>
+        <div class="example-box">Segmenting customers into groups: budget shoppers, premium buyers, occasional buyers.</div>
+
+        <h3>Outlier Analysis</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          An <strong>outlier</strong> is a data point that deviates significantly from the majority of the data. Outlier analysis (anomaly detection) identifies such unusual objects.
+        </div>
+        <ul>
+          <li>Outliers may indicate fraud, errors, or rare but important events.</li>
+          <li>Methods: Statistical (Z-score, IQR), distance-based, density-based.</li>
+        </ul>
+        <div class="example-box">Detecting fraudulent credit card transactions that differ greatly from a user's normal spending pattern.</div>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="index.html" class="unit-nav-btn">← Home</a>
+        <a href="unit2.html" class="unit-nav-btn">Unit 2: Data Concepts →</a>
+      </div>
+
+    </div><!-- /container -->
+  </div><!-- /page-wrapper -->
+
+  <!-- Back to Top -->
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 1 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>
