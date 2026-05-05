@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 4 – Classification &amp; Clustering</title>
+  <meta name="description" content="Unit 4: Classification algorithms (Decision Trees, Naive Bayes, SVM, KNN, Fuzzy Sets) and Clustering (K-means, Hierarchical)." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header class="unit-header">
+      <div class="unit-label">UNIT 4</div>
+      <h1>Classification &amp; Clustering</h1>
+      <p>Supervised classification and unsupervised clustering algorithms</p>
+    </header>
+
+    <div class="container">
+
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#classification">4.1 Classification</a>
+            <ol>
+              <li><a href="#decision-trees">Decision Trees</a></li>
+              <li><a href="#naive-bayes">Naive Bayes</a></li>
+              <li><a href="#rule-based">Rule-based Classification</a></li>
+              <li><a href="#svm">Support Vector Machine</a></li>
+              <li><a href="#knn">K-Nearest Neighbor</a></li>
+              <li><a href="#genetic">Genetic Algorithms</a></li>
+              <li><a href="#fuzzy">Fuzzy Sets</a></li>
+            </ol>
+          </li>
+          <li><a href="#clustering">4.2 Clustering</a>
+            <ol>
+              <li><a href="#kmeans">K-means</a></li>
+              <li><a href="#hierarchical">Hierarchical Clustering</a></li>
+              <li><a href="#partition">Partition Clustering</a></li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- 4.1 Classification -->
+      <section class="section-card" id="classification" aria-labelledby="h-cls">
+        <h2 id="h-cls"><span class="section-icon">🏫</span> 4.1 Classification</h2>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Classification is a <strong>supervised learning</strong> task that maps an input data object to one of several predefined discrete categories (classes), based on a model learned from labeled training data.
+        </div>
+        <p><strong>Steps:</strong> (1) Build a model from a training dataset with known class labels. (2) Use the model to predict the class of new, unseen data.</p>
+
+        <h3 id="decision-trees">Decision Trees</h3>
+        <p>A tree-like structure where each <strong>internal node</strong> tests an attribute, each <strong>branch</strong> represents an outcome, and each <strong>leaf node</strong> holds a class label.</p>
+        <ul>
+          <li><strong>Splitting criterion:</strong> Information Gain (ID3), Gain Ratio (C4.5), Gini Index (CART).</li>
+          <li><strong>Pruning:</strong> Remove branches that overfit the training data.</li>
+          <li>Advantages: easy to interpret, handles mixed data types.</li>
+        </ul>
+        <div class="code-block">Information Gain = Entropy(parent) − Σ [|Dᵥ|/|D|] × Entropy(Dᵥ)
+Entropy(D) = −Σ pᵢ log₂(pᵢ)   (pᵢ = proportion of class i)</div>
+        <div class="example-box">A decision tree for loan approval might first split on "Credit Score" (&gt;700 → approve; ≤700 → check income).</div>
+
+        <h3 id="naive-bayes">Naive Bayes</h3>
+        <p>Probabilistic classifier based on <strong>Bayes' Theorem</strong>, assuming that features are <strong>conditionally independent</strong> given the class.</p>
+        <div class="code-block">P(C | X) ∝ P(C) × Π P(xᵢ | C)
+  C = class, X = (x₁, x₂, …, xₙ) = feature vector</div>
+        <ul>
+          <li>Very fast and effective for text classification.</li>
+          <li>Works well even with small datasets.</li>
+          <li>"Naive" because of the independence assumption (rarely holds in practice, yet performs well).</li>
+        </ul>
+        <div class="example-box">Email spam filtering: P(spam | "win", "prize", "free") ∝ P(spam) × P("win"|spam) × P("prize"|spam) × P("free"|spam).</div>
+
+        <h3 id="rule-based">Rule-based Classification</h3>
+        <p>The classifier is represented as a set of <strong>IF-THEN rules</strong>.</p>
+        <div class="code-block">Rule: IF (age &gt; 30) AND (income &gt; 50K) THEN class = "good_credit"</div>
+        <ul>
+          <li><strong>Conflict resolution:</strong> Use rule priority, most specific rule, or majority vote.</li>
+          <li>Rules can be extracted from decision trees or learned directly (PRISM, RIPPER algorithms).</li>
+          <li>Easy for humans to understand and verify.</li>
+        </ul>
+
+        <h3 id="svm">Support Vector Machine (SVM)</h3>
+        <p>SVM finds the <strong>optimal hyperplane</strong> that maximally separates two classes by maximizing the margin between the nearest points of both classes (support vectors).</p>
+        <ul>
+          <li><strong>Linear SVM:</strong> Works when data is linearly separable.</li>
+          <li><strong>Kernel SVM:</strong> Uses kernel trick (RBF, polynomial) to handle non-linearly separable data.</li>
+          <li>Effective in high-dimensional spaces (e.g., text classification).</li>
+          <li>Disadvantage: slower training for large datasets.</li>
+        </ul>
+        <div class="example-box">Face recognition — SVM separates face images from non-face images in a high-dimensional pixel space.</div>
+
+        <h3 id="knn">K-Nearest Neighbor (KNN)</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          KNN classifies a new instance by looking at the <strong>K closest training instances</strong> and assigning the majority class among them.
+        </div>
+        <ul>
+          <li>Lazy learner — no explicit model built; classification done at query time.</li>
+          <li>Distance metrics: Euclidean, Manhattan, Minkowski.</li>
+          <li>Choosing K: small K = overfitting; large K = underfitting.</li>
+        </ul>
+        <div class="code-block">Euclidean Distance = √[ Σ (xᵢ − yᵢ)² ]</div>
+        <div class="example-box">Recommend movies by finding the K users most similar (nearest) to the current user and recommending what they liked.</div>
+
+        <h3 id="genetic">Genetic Algorithms</h3>
+        <p>Evolutionary optimization technique inspired by <strong>natural selection</strong> to search for good classification rules or models.</p>
+        <ul>
+          <li><strong>Encoding:</strong> Candidate solutions (rules/classifiers) encoded as chromosomes (bit strings).</li>
+          <li><strong>Fitness function:</strong> Measures how well a chromosome classifies training data.</li>
+          <li><strong>Operators:</strong> Selection, Crossover (recombination), Mutation, Replacement.</li>
+          <li>Iterates until convergence; good at global search but computationally expensive.</li>
+        </ul>
+        <div class="example-box">Evolve a set of if-then classification rules for detecting network intrusions over many generations.</div>
+
+        <h3 id="fuzzy">Fuzzy Sets</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Fuzzy sets extend classical sets by allowing <strong>partial membership</strong>: an element can belong to a set with a degree between 0 and 1.
+        </div>
+        <ul>
+          <li>Handles uncertainty and vagueness in classification boundaries.</li>
+          <li><strong>Membership function:</strong> Maps a value to a membership degree [0, 1].</li>
+          <li>Fuzzy rules: IF temperature is "warm" THEN fan speed is "medium".</li>
+          <li>Commonly used in control systems and expert systems.</li>
+        </ul>
+        <div class="example-box">Age 35 belongs to "Young" with degree 0.6 and "Middle-aged" with degree 0.4, instead of a hard boundary.</div>
+      </section>
+
+      <!-- 4.2 Clustering -->
+      <section class="section-card" id="clustering" aria-labelledby="h-clus">
+        <h2 id="h-clus"><span class="section-icon">🫧</span> 4.2 Clustering</h2>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Clustering is an <strong>unsupervised learning</strong> method that partitions a dataset into groups (clusters) such that items in the same cluster are more similar to each other than to items in other clusters. No predefined labels exist.
+        </div>
+
+        <h3 id="kmeans">K-means Clustering</h3>
+        <p>Partitions n objects into <strong>k clusters</strong> by minimizing the sum of squared distances from each object to its cluster centroid.</p>
+        <h4>Algorithm Steps</h4>
+        <ol>
+          <li>Choose k (number of clusters) and initialize k centroids randomly.</li>
+          <li><strong>Assignment step:</strong> Assign each data point to the nearest centroid.</li>
+          <li><strong>Update step:</strong> Recalculate centroid as the mean of all points in the cluster.</li>
+          <li>Repeat steps 2–3 until centroids do not change (convergence).</li>
+        </ol>
+        <div class="code-block">Objective: Minimize Σᵢ Σₓ∈Cᵢ ||x − μᵢ||²
+  μᵢ = centroid of cluster i</div>
+        <ul>
+          <li><strong>Pros:</strong> Simple, fast, scales well.</li>
+          <li><strong>Cons:</strong> Must specify k, sensitive to outliers and initial centroids, assumes spherical clusters.</li>
+        </ul>
+        <div class="example-box">Customer segmentation: k=3 gives "low spenders", "mid spenders", "high spenders" based on purchase history.</div>
+
+        <h3 id="hierarchical">Hierarchical Clustering</h3>
+        <p>Creates a <strong>tree (dendrogram)</strong> of clusters by successively merging or splitting clusters.</p>
+        <h4>Agglomerative (Bottom-up)</h4>
+        <ol>
+          <li>Start: each point is its own cluster.</li>
+          <li>Merge the two closest clusters at each step.</li>
+          <li>Continue until all points are in one cluster.</li>
+        </ol>
+        <h4>Divisive (Top-down)</h4>
+        <ol>
+          <li>Start: all points in one cluster.</li>
+          <li>Split the cluster into two at each step.</li>
+          <li>Continue until each point is its own cluster.</li>
+        </ol>
+        <h4>Linkage Methods</h4>
+        <ul>
+          <li><strong>Single linkage:</strong> Distance = minimum distance between any two points.</li>
+          <li><strong>Complete linkage:</strong> Distance = maximum distance between any two points.</li>
+          <li><strong>Average linkage:</strong> Distance = average of all pairwise distances.</li>
+          <li><strong>Ward's method:</strong> Minimize within-cluster variance.</li>
+        </ul>
+        <div class="example-box">Phylogenetic trees in biology — grouping species based on genetic similarity using hierarchical clustering.</div>
+
+        <h3 id="partition">Partition Clustering</h3>
+        <p>Partition methods <strong>divide a dataset into k non-overlapping groups</strong>, where each data point belongs to exactly one cluster.</p>
+        <ul>
+          <li><strong>K-means</strong> is the most well-known partition method (covered above).</li>
+          <li><strong>K-medoids (PAM):</strong> Uses actual data points as cluster centers (medoids), more robust to outliers than k-means.</li>
+          <li><strong>CLARANS:</strong> Randomized search variant of k-medoids for spatial data.</li>
+        </ul>
+        <div class="example-box">Partitioning a city's neighborhoods into k districts based on demographic similarity for targeted marketing.</div>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="unit3.html" class="unit-nav-btn">← Unit 3: Preprocessing</a>
+        <a href="unit5.html" class="unit-nav-btn">Unit 5: Tools →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 4 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>
