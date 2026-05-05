@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 5 – Data Mining Tools</title>
+  <meta name="description" content="Unit 5: Data Mining Tools – introduction, installation, features, preprocessing, classification, clustering, association, and feature selection." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header class="unit-header">
+      <div class="unit-label">UNIT 5</div>
+      <h1>Data Mining Tools</h1>
+      <p>Popular tools, their features, and practical usage</p>
+    </header>
+
+    <div class="container">
+
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#intro-tools">5.1 Introduction &amp; Installation</a></li>
+          <li><a href="#features-tools">5.2 Features of Data Mining Tools</a></li>
+        </ol>
+      </nav>
+
+      <!-- 5.1 Introduction -->
+      <section class="section-card" id="intro-tools" aria-labelledby="h-intro">
+        <h2 id="h-intro"><span class="section-icon">🛠️</span> 5.1 Introduction to Data Mining Tools</h2>
+        <div class="definition-box">
+          <strong>What are Data Mining Tools?</strong>
+          Data mining tools are <strong>software applications</strong> that provide an integrated environment for data loading, preprocessing, applying mining algorithms, visualizing results, and evaluating models — without requiring deep programming knowledge.
+        </div>
+        <p>They automate and simplify the data mining workflow, making it accessible to analysts, researchers, and students.</p>
+
+        <h3>Popular Data Mining Tools</h3>
+        <ul>
+          <li><strong>Weka</strong> (Waikato Environment for Knowledge Analysis) — Free, Java-based, GUI &amp; command-line, widely used in academia.</li>
+          <li><strong>RapidMiner</strong> — Visual workflow designer; supports big data and cloud deployments.</li>
+          <li><strong>KNIME</strong> — Open-source, node-based pipeline; extensible with Python/R.</li>
+          <li><strong>Orange</strong> — Visual data analysis, beginner-friendly, Python-based.</li>
+          <li><strong>SAS Enterprise Miner</strong> — Commercial, enterprise-grade, widely used in industry.</li>
+          <li><strong>IBM SPSS Modeler</strong> — Visual, supports CRISP-DM methodology.</li>
+          <li><strong>R &amp; Python (scikit-learn)</strong> — Programming environments with rich libraries.</li>
+        </ul>
+
+        <h3>Installation of Weka (Primary Tool)</h3>
+        <p>Weka is the most commonly used academic data mining tool and is freely available.</p>
+        <h4>System Requirements</h4>
+        <ul>
+          <li>Java Runtime Environment (JRE) 8 or higher installed.</li>
+          <li>Windows, macOS, or Linux operating system.</li>
+          <li>At least 512 MB RAM (2 GB recommended).</li>
+        </ul>
+        <h4>Installation Steps</h4>
+        <ol>
+          <li>Visit the official Weka website: <strong>cs.waikato.ac.nz/ml/weka</strong></li>
+          <li>Download the appropriate installer for your OS (Windows self-extracting installer, macOS .dmg, or Linux .zip).</li>
+          <li>Run the installer and follow on-screen instructions.</li>
+          <li>Launch Weka GUI Chooser — you will see four options: Explorer, Experimenter, KnowledgeFlow, Workbench.</li>
+          <li>Use <strong>Explorer</strong> for basic data mining tasks.</li>
+        </ol>
+        <div class="example-box">After installation, open Weka Explorer → Preprocess tab → Open the built-in "iris.arff" dataset to verify the tool works correctly.</div>
+
+        <h4>Weka's Four Interfaces</h4>
+        <ul>
+          <li><strong>Explorer:</strong> Interactive point-and-click interface for all mining tasks.</li>
+          <li><strong>Experimenter:</strong> Automates running and comparing multiple algorithms.</li>
+          <li><strong>KnowledgeFlow:</strong> Drag-and-drop pipeline builder for incremental processing.</li>
+          <li><strong>Workbench:</strong> Combined interface (introduced in Weka 3.8).</li>
+        </ul>
+      </section>
+
+      <!-- 5.2 Features -->
+      <section class="section-card" id="features-tools" aria-labelledby="h-feat">
+        <h2 id="h-feat"><span class="section-icon">✨</span> 5.2 Features of Data Mining Tools</h2>
+
+        <h3>Loading Data</h3>
+        <p>Tools support loading datasets from various sources and formats.</p>
+        <ul>
+          <li><strong>From file:</strong> Click "Open file" in the Preprocess tab.</li>
+          <li><strong>From URL:</strong> Load data directly from a web address.</li>
+          <li><strong>From database:</strong> Connect via JDBC to import from RDBMS.</li>
+          <li>Weka displays attribute statistics and a visual histogram immediately after loading.</li>
+        </ul>
+        <div class="example-box">Load "weather.nominal.arff" → See attributes: outlook, temperature, humidity, windy, play — with value distributions shown.</div>
+
+        <h3>File Formats Supported</h3>
+        <ul>
+          <li><strong>ARFF (Attribute-Relation File Format):</strong> Weka's native format. Contains @relation, @attribute, and @data sections.</li>
+          <li><strong>CSV (Comma-Separated Values):</strong> Universal tabular format; supported by all tools.</li>
+          <li><strong>JSON:</strong> Flexible hierarchical data, supported by modern tools.</li>
+          <li><strong>Excel (.xls, .xlsx):</strong> Spreadsheet format.</li>
+          <li><strong>LibSVM format:</strong> Sparse data for SVM algorithms.</li>
+          <li><strong>Database via JDBC:</strong> Direct SQL query results.</li>
+        </ul>
+        <div class="code-block">@relation weather
+
+@attribute outlook {sunny, overcast, rainy}
+@attribute temperature numeric
+@attribute humidity numeric
+@attribute windy {TRUE, FALSE}
+@attribute play {yes, no}
+
+@data
+sunny,85,85,FALSE,no
+sunny,80,90,TRUE,no
+overcast,83,86,FALSE,yes
+...</div>
+
+        <h3>Preprocessing in Tools</h3>
+        <p>Data preprocessing filters available in Weka (and similar tools):</p>
+        <ul>
+          <li><strong>Normalize/Standardize:</strong> Scale numeric attributes to [0,1] or mean=0, std=1.</li>
+          <li><strong>ReplaceMissingValues:</strong> Replace missing values with mean/mode.</li>
+          <li><strong>Discretize:</strong> Convert continuous attributes to nominal (bins).</li>
+          <li><strong>Remove:</strong> Delete specified attributes.</li>
+          <li><strong>PrincipalComponents:</strong> Apply PCA for dimensionality reduction.</li>
+          <li><strong>StringToWordVector:</strong> Convert text to feature vectors (for text mining).</li>
+        </ul>
+        <div class="example-box">In Weka Explorer → Preprocess → Choose "Normalize" filter → Apply → All numeric attributes are scaled to [0, 1].</div>
+
+        <h3>Classification in Tools</h3>
+        <p>The Classify tab provides access to all classification algorithms.</p>
+        <ul>
+          <li>Select a classifier (e.g., J48 for Decision Tree, NaiveBayes, SMO for SVM, IBk for KNN).</li>
+          <li>Choose evaluation method: Cross-validation (default: 10-fold), percentage split, use training set.</li>
+          <li>Click "Start" — view accuracy, confusion matrix, precision, recall, F-measure, ROC.</li>
+          <li>Right-click on result to visualize the decision tree or error on predictions.</li>
+        </ul>
+        <div class="example-box">Classify iris dataset with J48 (C4.5 Decision Tree), 10-fold CV → ~95% accuracy with a visual tree showing petal measurements as decision nodes.</div>
+
+        <h3>Clustering in Tools</h3>
+        <p>The Cluster tab provides access to clustering algorithms.</p>
+        <ul>
+          <li><strong>SimpleKMeans:</strong> K-means algorithm. Set number of clusters (numClusters).</li>
+          <li><strong>EM (Expectation Maximization):</strong> Probabilistic soft clustering.</li>
+          <li><strong>HierarchicalClusterer:</strong> Builds a dendrogram.</li>
+          <li><strong>DBSCAN:</strong> Density-based; finds clusters of arbitrary shape.</li>
+          <li>Evaluate: cluster assignments, silhouette score, intra-cluster distances.</li>
+        </ul>
+        <div class="example-box">Cluster iris dataset with SimpleKMeans (k=3) → 3 clusters corresponding closely to the 3 actual species.</div>
+
+        <h3>Association Rule Mining in Tools</h3>
+        <p>The Associate tab enables mining of association rules.</p>
+        <ul>
+          <li><strong>Apriori algorithm:</strong> Classic frequent itemset mining. Set minSupport and minConfidence.</li>
+          <li><strong>FPGrowth:</strong> Faster alternative using a compact FP-tree structure.</li>
+          <li>Output shows rules ranked by confidence, support, and lift.</li>
+        </ul>
+        <div class="example-box">On supermarket data with minSupport=0.3, minConfidence=0.8 → Rule: {diapers} → {beer} [conf=0.85, support=0.32, lift=1.9]</div>
+
+        <h3>Feature Selection in Tools</h3>
+        <p>Feature (attribute) selection reduces dimensionality by identifying the most informative attributes.</p>
+        <ul>
+          <li><strong>Select Attributes tab (Weka):</strong> Choose attribute evaluator + search method.</li>
+          <li><strong>Evaluators:</strong> InfoGainAttributeEval, CfsSubsetEval, ChiSquaredAttributeEval, GainRatioAttributeEval.</li>
+          <li><strong>Search methods:</strong> BestFirst, GreedyStepwise, Ranker.</li>
+          <li>Output: ranked list of attributes or selected subset.</li>
+        </ul>
+        <div class="example-box">On a 30-attribute medical dataset → CfsSubsetEval selects 8 most relevant attributes → reduces training time by 60% with minimal accuracy loss.</div>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="unit4.html" class="unit-nav-btn">← Unit 4: Classification</a>
+        <a href="unit6.html" class="unit-nav-btn">Unit 6: Warehousing →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 5 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>
