@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 6 – Data Warehousing</title>
+  <meta name="description" content="Unit 6: Data Warehousing – basics, characteristics, ETL, multitier architecture, models, and metadata." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header class="unit-header">
+      <div class="unit-label">UNIT 6</div>
+      <h1>Data Warehousing</h1>
+      <p>Architecture, ETL, models, and metadata for decision support</p>
+    </header>
+
+    <div class="container">
+
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#basics-dw">6.1 Basics of Data Warehousing</a></li>
+          <li><a href="#architecture-dw">6.2 Architecture</a></li>
+        </ol>
+      </nav>
+
+      <!-- 6.1 Basics -->
+      <section class="section-card" id="basics-dw" aria-labelledby="h-bdw">
+        <h2 id="h-bdw"><span class="section-icon">🏛️</span> 6.1 Basics of Data Warehousing</h2>
+
+        <h3>Definition</h3>
+        <div class="definition-box">
+          <strong>Definition (W.H. Inmon)</strong>
+          A Data Warehouse is a <strong>subject-oriented, integrated, time-variant, and non-volatile</strong> collection of data in support of management's decision-making process.
+        </div>
+        <ul>
+          <li><strong>Subject-oriented:</strong> Organised around major subjects (customers, sales, products), not applications.</li>
+          <li><strong>Integrated:</strong> Data from disparate sources is cleaned and unified.</li>
+          <li><strong>Time-variant:</strong> Contains historical data — every key contains a time element.</li>
+          <li><strong>Non-volatile:</strong> Data is not updated or deleted — only loaded and read.</li>
+        </ul>
+
+        <h3>Operational DB vs. Data Warehouse</h3>
+        <div class="section-card" style="box-shadow:none; border: 1px solid var(--border); margin-bottom:0.5rem;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+            <thead>
+              <tr style="background:var(--badge-bg); color:var(--badge-text);">
+                <th style="padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid var(--border);">Feature</th>
+                <th style="padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid var(--border);">Operational DB (OLTP)</th>
+                <th style="padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid var(--border);">Data Warehouse (OLAP)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Purpose</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Day-to-day operations</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Decision support &amp; analysis</td>
+              </tr>
+              <tr style="background:var(--bg);">
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Data</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Current, detailed</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Historical, summarized</td>
+              </tr>
+              <tr>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Operations</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">INSERT, UPDATE, DELETE</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Mostly SELECT (read-only)</td>
+              </tr>
+              <tr style="background:var(--bg);">
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Schema</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Normalized (3NF)</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Denormalized (Star/Snowflake)</td>
+              </tr>
+              <tr>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Users</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Clerks, tellers, front-end</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Analysts, managers, executives</td>
+              </tr>
+              <tr style="background:var(--bg);">
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);"><strong>Query size</strong></td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Short, simple transactions</td>
+                <td style="padding:0.45rem 0.75rem; border-bottom:1px solid var(--border);">Complex, long-running queries</td>
+              </tr>
+              <tr>
+                <td style="padding:0.45rem 0.75rem;"><strong>Size</strong></td>
+                <td style="padding:0.45rem 0.75rem;">100 MB – 10 GB</td>
+                <td style="padding:0.45rem 0.75rem;">100 GB – Terabytes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Characteristics of a Data Warehouse</h3>
+        <ul>
+          <li>Stores large amounts of historical data.</li>
+          <li>Supports complex analytical and ad-hoc queries.</li>
+          <li>Contains data integrated from multiple heterogeneous sources.</li>
+          <li>Data is consistent with standardized formats and definitions.</li>
+          <li>Provides a single version of the truth for the organization.</li>
+        </ul>
+
+        <h3>Functions of a Data Warehouse</h3>
+        <ul>
+          <li><strong>Data consolidation:</strong> Gather data from disparate operational systems.</li>
+          <li><strong>Data transformation:</strong> Standardize formats, resolve inconsistencies.</li>
+          <li><strong>Historical storage:</strong> Maintain years or decades of data for trend analysis.</li>
+          <li><strong>Query support:</strong> Serve complex analytical queries efficiently using OLAP cubes.</li>
+          <li><strong>Report generation:</strong> Provide dashboards, reports, and KPIs to decision-makers.</li>
+        </ul>
+
+        <h3>Advantages of Data Warehousing</h3>
+        <ul>
+          <li>Improved business intelligence and decision-making.</li>
+          <li>Single, unified view of organizational data.</li>
+          <li>Historical analysis and trend identification.</li>
+          <li>Improved query performance (separate from OLTP systems).</li>
+          <li>Data quality improvement through ETL processes.</li>
+          <li>Enables data mining and predictive analytics.</li>
+        </ul>
+
+        <h3>Disadvantages</h3>
+        <ul>
+          <li>High initial cost of setup and maintenance.</li>
+          <li>Complex ETL processes for data loading.</li>
+          <li>Data latency — not real-time (batch updates).</li>
+          <li>Requires skilled personnel and ongoing administration.</li>
+          <li>Flexibility issues when source systems change.</li>
+        </ul>
+
+        <h3>Applications</h3>
+        <ul>
+          <li><strong>Retail:</strong> Sales trend analysis, inventory management, customer segmentation.</li>
+          <li><strong>Healthcare:</strong> Patient outcome tracking, resource utilization analysis.</li>
+          <li><strong>Finance:</strong> Risk analysis, regulatory reporting, fraud detection.</li>
+          <li><strong>Telecommunications:</strong> Call detail records analysis, churn prediction.</li>
+          <li><strong>Government:</strong> Tax analysis, budget planning, public service optimization.</li>
+        </ul>
+        <div class="example-box">A retail chain uses its data warehouse to analyze five years of sales data, identifying that umbrella sales spike in coastal cities three weeks before monsoon season — enabling proactive stocking.</div>
+      </section>
+
+      <!-- 6.2 Architecture -->
+      <section class="section-card" id="architecture-dw" aria-labelledby="h-adw">
+        <h2 id="h-adw"><span class="section-icon">🏗️</span> 6.2 Architecture of Data Warehousing</h2>
+
+        <h3>Multitier Architecture</h3>
+        <p>The most common data warehouse architecture uses a <strong>three-tier design</strong>:</p>
+        <ol>
+          <li>
+            <strong>Bottom Tier (Data Sources &amp; ETL Layer):</strong><br/>
+            Operational databases, external data sources, flat files → data extracted, transformed, and loaded into the warehouse.
+          </li>
+          <li>
+            <strong>Middle Tier (Data Warehouse Server):</strong><br/>
+            The central warehouse stores the integrated, cleaned, historical data. OLAP server sits here.
+          </li>
+          <li>
+            <strong>Top Tier (Frontend / Client Layer):</strong><br/>
+            Query and reporting tools, dashboards, data mining tools, and OLAP clients used by end-users.
+          </li>
+        </ol>
+        <div class="example-box">Tier 1: Sales, HR, and Finance OLTP databases → ETL → Tier 2: Enterprise Data Warehouse → Tier 3: BI dashboards and Excel pivot tables.</div>
+
+        <h3>Stages of Data Warehousing</h3>
+        <ol>
+          <li><strong>Data Sourcing:</strong> Identify and connect to source systems.</li>
+          <li><strong>Data Staging:</strong> Temporary area where raw extracted data is held before transformation.</li>
+          <li><strong>Data Integration (ETL):</strong> Transform, clean, and load data into the warehouse.</li>
+          <li><strong>Data Storage:</strong> Persist data in the central warehouse with appropriate schemas.</li>
+          <li><strong>Data Access &amp; Analysis:</strong> End users query via OLAP or BI tools.</li>
+          <li><strong>Data Presentation:</strong> Reports, dashboards, visualizations delivered to stakeholders.</li>
+        </ol>
+
+        <h3>Data Warehouse Models</h3>
+        <h4>Enterprise Data Warehouse (EDW)</h4>
+        <p>A centralized warehouse that integrates <strong>all enterprise-wide data</strong> across all departments and subjects.</p>
+        <ul>
+          <li>Single source of truth for the entire organization.</li>
+          <li>High initial cost and complexity.</li>
+          <li>Best for large organizations needing consistent cross-departmental reporting.</li>
+        </ul>
+        <div class="example-box">A bank's EDW contains customer, loan, transaction, and branch data from all regional offices under one schema.</div>
+
+        <h4>Data Mart</h4>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          A <strong>data mart</strong> is a subset of a data warehouse that focuses on a <strong>specific business area or department</strong> (e.g., marketing, sales, HR).
+        </div>
+        <ul>
+          <li><strong>Dependent data mart:</strong> Derived from the enterprise data warehouse.</li>
+          <li><strong>Independent data mart:</strong> Created directly from source data, without an EDW.</li>
+          <li>Faster to implement and lower cost than an EDW.</li>
+          <li>Allows departments to have tailored data structures and access control.</li>
+        </ul>
+        <div class="example-box">The Marketing department's data mart contains only customer demographics, campaign results, and purchase history — irrelevant HR or finance data is excluded.</div>
+
+        <h4>Virtual Warehouse</h4>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          A <strong>virtual warehouse</strong> provides views over operational databases — no physical data is copied to a central store; data is queried on-demand from source systems.
+        </div>
+        <ul>
+          <li>Low storage cost — no data duplication.</li>
+          <li>Data is always current (real-time).</li>
+          <li>Performance bottleneck on source systems for complex queries.</li>
+          <li>Less scalable than physical warehouses.</li>
+        </ul>
+        <div class="example-box">A virtual data warehouse queries three live databases simultaneously when a report is run, presenting the results as if from one unified source.</div>
+
+        <h3>ETL Process (Extract, Transform, Load)</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          ETL is the process of <strong>extracting</strong> data from source systems, <strong>transforming</strong> it into a consistent format, and <strong>loading</strong> it into the data warehouse.
+        </div>
+
+        <h4>Extract</h4>
+        <ul>
+          <li>Pull data from OLTP databases, flat files, APIs, or external sources.</li>
+          <li>Full extraction or incremental extraction (changed data only).</li>
+          <li>Data is staged in a temporary landing area.</li>
+        </ul>
+
+        <h4>Transform</h4>
+        <ul>
+          <li><strong>Cleaning:</strong> Handle missing values, fix data type issues, remove duplicates.</li>
+          <li><strong>Standardization:</strong> Unify date formats, currency units, name conventions.</li>
+          <li><strong>Enrichment:</strong> Derive new attributes (e.g., calculate age from date of birth).</li>
+          <li><strong>Business rules:</strong> Apply domain-specific transformations and validations.</li>
+          <li><strong>Aggregation:</strong> Summarize data (daily → monthly totals).</li>
+        </ul>
+
+        <h4>Load</h4>
+        <ul>
+          <li><strong>Initial (full) load:</strong> First-time load of all historical data.</li>
+          <li><strong>Incremental load:</strong> Subsequent periodic loads of new/changed data.</li>
+          <li><strong>Slowly Changing Dimensions (SCD):</strong> Strategies for handling attribute changes over time (Type 1: overwrite, Type 2: add new row, Type 3: add new column).</li>
+        </ul>
+        <div class="example-box">ETL job runs nightly: Extract yesterday's sales from 50 retail POS systems → Transform currencies, standardize product codes → Load into the Sales fact table in the warehouse.</div>
+
+        <h3>Metadata Repository</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Metadata is <strong>"data about data"</strong>. The metadata repository stores all descriptive information about the data warehouse and its contents.
+        </div>
+        <h4>Types of Metadata</h4>
+        <ul>
+          <li><strong>Technical metadata:</strong> Schema definitions, data lineage, ETL mappings, data types, table structures.</li>
+          <li><strong>Business metadata:</strong> Business definitions of data elements, ownership, business rules, KPI definitions.</li>
+          <li><strong>Operational metadata:</strong> ETL job logs, last refresh times, data volumes, error logs.</li>
+        </ul>
+        <h4>Functions of Metadata Repository</h4>
+        <ul>
+          <li>Enables users to understand what data is available and what it means.</li>
+          <li>Tracks data lineage — where did this data come from and how was it transformed?</li>
+          <li>Supports impact analysis — what reports break if we change this attribute?</li>
+          <li>Improves governance and compliance by documenting data policies.</li>
+        </ul>
+        <div class="example-box">An analyst queries the metadata repository to find out that the "Revenue" field in the Sales mart is calculated as (Quantity × UnitPrice − Discount), sourced from the ERP system's order table.</div>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="unit5.html" class="unit-nav-btn">← Unit 5: Tools</a>
+        <a href="index.html" class="unit-nav-btn">🏠 Back to Home</a>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 6 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>
