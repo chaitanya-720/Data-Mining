@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Mining – Study Guide</title>
+  <meta name="description" content="Complete unit-wise study guide for Data Mining exam preparation. Covers basics, preprocessing, classification, clustering, tools and data warehousing." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE WRAPPER ===== -->
+  <div class="page-wrapper">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">📚 Exam Preparation Guide</div>
+      <h1>Data Mining Study Guide</h1>
+      <p>A comprehensive, unit-wise reference for all core Data Mining concepts — from basics to data warehousing.</p>
+    </section>
+
+    <div class="container">
+
+      <!-- Search -->
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="searchBar"
+          class="search-bar"
+          placeholder="Search topics, terms, algorithms…"
+          aria-label="Search topics"
+          autocomplete="off"
+        />
+        <div id="searchResults" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+
+      <!-- Unit cards grid -->
+      <div class="section-title">📖 All Units</div>
+      <div class="unit-grid">
+
+        <a href="unit1.html" class="unit-card">
+          <div class="unit-card-number">UNIT 1</div>
+          <h3>Basics of Data Mining</h3>
+          <p>Understand what data mining is, its challenges, applications, and the fundamental patterns it discovers.</p>
+          <div class="card-topics">
+            <span class="topic-tag">Definition</span>
+            <span class="topic-tag">Kinds of Data</span>
+            <span class="topic-tag">Pattern Mining</span>
+            <span class="topic-tag">Cluster Analysis</span>
+          </div>
+        </a>
+
+        <a href="unit2.html" class="unit-card">
+          <div class="unit-card-number">UNIT 2</div>
+          <h3>Data Concepts</h3>
+          <p>Explore data attributes, measures of central tendency, and dispersion — the statistical foundation of data mining.</p>
+          <div class="card-topics">
+            <span class="topic-tag">Attributes</span>
+            <span class="topic-tag">Mean / Median / Mode</span>
+            <span class="topic-tag">Variance</span>
+            <span class="topic-tag">Outliers</span>
+          </div>
+        </a>
+
+        <a href="unit3.html" class="unit-card">
+          <div class="unit-card-number">UNIT 3</div>
+          <h3>Data Preprocessing</h3>
+          <p>Learn how raw data is cleaned, integrated, transformed, and reduced before analysis.</p>
+          <div class="card-topics">
+            <span class="topic-tag">Data Cleaning</span>
+            <span class="topic-tag">Integration</span>
+            <span class="topic-tag">Reduction</span>
+            <span class="topic-tag">PCA</span>
+          </div>
+        </a>
+
+        <a href="unit4.html" class="unit-card">
+          <div class="unit-card-number">UNIT 4</div>
+          <h3>Classification &amp; Clustering</h3>
+          <p>Deep dive into major machine learning techniques used in data mining for prediction and grouping.</p>
+          <div class="card-topics">
+            <span class="topic-tag">Decision Trees</span>
+            <span class="topic-tag">SVM</span>
+            <span class="topic-tag">K-means</span>
+            <span class="topic-tag">Naive Bayes</span>
+          </div>
+        </a>
+
+        <a href="unit5.html" class="unit-card">
+          <div class="unit-card-number">UNIT 5</div>
+          <h3>Data Mining Tools</h3>
+          <p>Overview of popular tools used for data mining, their features, and how to use them practically.</p>
+          <div class="card-topics">
+            <span class="topic-tag">Weka</span>
+            <span class="topic-tag">File Formats</span>
+            <span class="topic-tag">Feature Selection</span>
+            <span class="topic-tag">Association</span>
+          </div>
+        </a>
+
+        <a href="unit6.html" class="unit-card">
+          <div class="unit-card-number">UNIT 6</div>
+          <h3>Data Warehousing</h3>
+          <p>Study the architecture, ETL processes, and models of data warehouses and how they support decision-making.</p>
+          <div class="card-topics">
+            <span class="topic-tag">ETL</span>
+            <span class="topic-tag">Architecture</span>
+            <span class="topic-tag">Data Mart</span>
+            <span class="topic-tag">Metadata</span>
+          </div>
+        </a>
+
+      </div><!-- /unit-grid -->
+
+    </div><!-- /container -->
+  </div><!-- /page-wrapper -->
+
+  <!-- Back to Top -->
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <!-- Footer -->
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Built for exam preparation. &copy; 2024</p>
+  </footer>
+
+</body>
+</html>
