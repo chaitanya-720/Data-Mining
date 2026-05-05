@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 2 – Data Concepts</title>
+  <meta name="description" content="Unit 2: Data attributes, types, central tendency, and dispersion measures in data mining." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header class="unit-header">
+      <div class="unit-label">UNIT 2</div>
+      <h1>Data Concepts</h1>
+      <p>Attributes, central tendency, and statistical dispersion</p>
+    </header>
+
+    <div class="container">
+
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#data-attributes">2.1 Data Attributes</a></li>
+          <li><a href="#central-tendency">2.2 Central Tendency</a></li>
+          <li><a href="#dispersion">2.3 Dispersion</a></li>
+        </ol>
+      </nav>
+
+      <!-- 2.1 Data Attributes -->
+      <section class="section-card" id="data-attributes" aria-labelledby="h-da">
+        <h2 id="h-da"><span class="section-icon">🏷️</span> 2.1 Data Attributes</h2>
+        <p>An <strong>attribute</strong> (also called a feature, variable, or field) is a data field representing a characteristic of a data object.</p>
+
+        <h3>Nominal Attributes</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Values are <strong>names or labels</strong>; no ordering or quantitative relationship exists.
+        </div>
+        <ul>
+          <li>Operations: equality (=, ≠)</li>
+          <li>Mode is the only meaningful measure of central tendency.</li>
+        </ul>
+        <div class="example-box">Eye color (brown, blue, green), hair color, zip code, gender, country names.</div>
+
+        <h3>Binary Attributes</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          A special case of nominal with only <strong>two categories</strong> (0/1, yes/no, true/false).
+        </div>
+        <ul>
+          <li><strong>Symmetric binary:</strong> Both outcomes equally important (e.g., gender).</li>
+          <li><strong>Asymmetric binary:</strong> One outcome more important (e.g., positive test result).</li>
+        </ul>
+        <div class="example-box">Medical diagnosis: HIV positive (1) or negative (0).</div>
+
+        <h3>Ordinal Attributes</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Values have a <strong>meaningful order or rank</strong>, but differences between values are not defined.
+        </div>
+        <ul>
+          <li>Operations: &lt;, &gt;, ordering.</li>
+          <li>Median and mode are valid; mean is not meaningful.</li>
+        </ul>
+        <div class="example-box">Academic grades (A, B, C, D, F), customer satisfaction (poor, fair, good, excellent).</div>
+
+        <h3>Numeric Attributes</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Values are <strong>quantitative</strong>; arithmetic operations are meaningful.
+        </div>
+        <ul>
+          <li><strong>Interval-scaled:</strong> Equal intervals, no true zero (e.g., temperature in °C).</li>
+          <li><strong>Ratio-scaled:</strong> Has a true zero, ratios meaningful (e.g., height, weight, salary).</li>
+        </ul>
+        <div class="example-box">Temperature (27°C), age (25 years), salary ($50,000).</div>
+
+        <h3>Discrete vs. Continuous Attributes</h3>
+        <h4>Discrete Attributes</h4>
+        <p>Take on a <strong>finite or countably infinite</strong> set of values. Often represented as integers.</p>
+        <div class="example-box">Number of children (0, 1, 2…), zip codes, ID numbers.</div>
+
+        <h4>Continuous Attributes</h4>
+        <p>Take on <strong>real-valued (float) numbers</strong> within a range; infinite possible values between any two points.</p>
+        <div class="example-box">Height (5.8 ft), temperature (98.6°F), weight (72.3 kg).</div>
+      </section>
+
+      <!-- 2.2 Central Tendency -->
+      <section class="section-card" id="central-tendency" aria-labelledby="h-ct">
+        <h2 id="h-ct"><span class="section-icon">📏</span> 2.2 Central Tendency</h2>
+        <p>Measures of central tendency describe the <strong>center or typical value</strong> of a dataset.</p>
+
+        <h3>Mean (Arithmetic Mean)</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          The average of all values: sum of all values divided by the number of values.
+        </div>
+        <div class="code-block">Mean (x̄) = (x₁ + x₂ + … + xₙ) / n
+
+Grouped Mean = Σ(fᵢ × mᵢ) / Σfᵢ
+  where fᵢ = frequency of class i, mᵢ = midpoint of class i</div>
+        <ul>
+          <li>Sensitive to extreme values (outliers).</li>
+          <li><strong>Trimmed mean:</strong> Remove top/bottom k% before computing mean.</li>
+          <li><strong>Weighted mean:</strong> Each value assigned a weight.</li>
+        </ul>
+        <div class="example-box">Scores: 45, 78, 92, 60, 85 → Mean = (45+78+92+60+85)/5 = 360/5 = <strong>72</strong></div>
+
+        <h3>Median</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          The <strong>middle value</strong> when data is sorted. For even n, the average of the two middle values.
+        </div>
+        <div class="code-block">Ungrouped: Sort data → pick middle element (odd n) or avg of two middle (even n)
+
+Grouped Median = L + [(n/2 − F) / f] × h
+  L = lower boundary of median class
+  F = cumulative frequency before median class
+  f = frequency of median class
+  h = class width</div>
+        <p>Resistant to outliers — better than mean for skewed data.</p>
+        <div class="example-box">Sorted scores: 45, 60, 78, 85, 92 → Median = <strong>78</strong> (middle value)</div>
+
+        <h3>Mode</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          The value that appears <strong>most frequently</strong> in the dataset. A dataset can be unimodal, bimodal, or multimodal.
+        </div>
+        <div class="code-block">Grouped Mode = L + [Δ₁ / (Δ₁ + Δ₂)] × h
+  Δ₁ = (f_modal − f_before),  Δ₂ = (f_modal − f_after)</div>
+        <div class="example-box">Values: 3, 7, 7, 7, 9, 10 → Mode = <strong>7</strong></div>
+
+        <p><strong>Relationship (Empirical Rule for skewed data):</strong></p>
+        <div class="code-block">Mean − Mode ≈ 3 × (Mean − Median)</div>
+      </section>
+
+      <!-- 2.3 Dispersion -->
+      <section class="section-card" id="dispersion" aria-labelledby="h-disp">
+        <h2 id="h-disp"><span class="section-icon">📉</span> 2.3 Dispersion</h2>
+        <p>Measures of dispersion describe the <strong>spread or variability</strong> of a dataset.</p>
+
+        <h3>Range</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Difference between the maximum and minimum values.
+        </div>
+        <div class="code-block">Range = Maximum − Minimum</div>
+        <div class="example-box">Scores: 45, 60, 78, 85, 92 → Range = 92 − 45 = <strong>47</strong></div>
+
+        <h3>Quartiles</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Quartiles divide sorted data into <strong>four equal parts</strong>. Q1 (25th percentile), Q2 (median/50th), Q3 (75th percentile).
+        </div>
+        <ul>
+          <li><strong>Q1 (Lower Quartile):</strong> 25% of data falls below this value.</li>
+          <li><strong>Q2 (Median):</strong> 50% of data falls below this value.</li>
+          <li><strong>Q3 (Upper Quartile):</strong> 75% of data falls below this value.</li>
+        </ul>
+        <div class="example-box">Dataset: 2, 4, 7, 9, 12, 15, 20 → Q1=4, Q2=9, Q3=15</div>
+
+        <h3>Interquartile Range (IQR)</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          The range of the middle 50% of the data.
+        </div>
+        <div class="code-block">IQR = Q3 − Q1</div>
+        <div class="example-box">If Q3=15, Q1=4 → IQR = 15 − 4 = <strong>11</strong></div>
+
+        <h3>Variance</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Average of the squared differences from the mean. Measures how far values are spread from the mean.
+        </div>
+        <div class="code-block">Population Variance (σ²) = Σ(xᵢ − x̄)² / n
+Sample Variance (s²)     = Σ(xᵢ − x̄)² / (n − 1)</div>
+        <div class="example-box">Data: 2, 4, 4, 4, 5, 5, 7, 9 → Mean=5, Variance = [(2-5)²+(4-5)²+…+(9-5)²]/8 = 4</div>
+
+        <h3>Standard Deviation</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Square root of variance. In the same units as the original data.
+        </div>
+        <div class="code-block">σ = √(Variance)   [population]
+s = √(s²)         [sample]</div>
+        <ul>
+          <li>Low σ: data points are close to the mean (low spread).</li>
+          <li>High σ: data points are spread far from the mean.</li>
+        </ul>
+        <div class="example-box">Variance = 4 → Standard Deviation σ = √4 = <strong>2</strong></div>
+
+        <h3>Outliers (via IQR method)</h3>
+        <div class="definition-box">
+          <strong>Rule</strong>
+          Any value below <strong>Q1 − 1.5×IQR</strong> or above <strong>Q3 + 1.5×IQR</strong> is considered an outlier.
+        </div>
+        <div class="code-block">Lower Fence = Q1 − 1.5 × IQR
+Upper Fence = Q3 + 1.5 × IQR</div>
+        <div class="example-box">Q1=4, Q3=15, IQR=11 → Lower=4−16.5=−12.5, Upper=15+16.5=31.5. A value of 50 would be an outlier.</div>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="unit1.html" class="unit-nav-btn">← Unit 1: Basics</a>
+        <a href="unit3.html" class="unit-nav-btn">Unit 3: Preprocessing →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 2 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>

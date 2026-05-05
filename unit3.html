@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 3 – Data Preprocessing</title>
+  <meta name="description" content="Unit 3: Data Preprocessing – cleaning, integration, reduction, and transformation techniques." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">📊 <span>Data</span>Mining</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unit1.html">Unit 1</a></li>
+        <li><a href="unit2.html">Unit 2</a></li>
+        <li><a href="unit3.html">Unit 3</a></li>
+        <li><a href="unit4.html">Unit 4</a></li>
+        <li><a href="unit5.html">Unit 5</a></li>
+        <li><a href="unit6.html">Unit 6</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header class="unit-header">
+      <div class="unit-label">UNIT 3</div>
+      <h1>Data Preprocessing</h1>
+      <p>Cleaning, integration, and reduction of raw data</p>
+    </header>
+
+    <div class="container">
+
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchBar" class="search-bar" placeholder="Search topics…" aria-label="Search" autocomplete="off" />
+        <div id="searchResults" class="search-results" role="listbox"></div>
+      </div>
+
+      <nav class="toc" aria-label="Table of Contents">
+        <h2>📋 Contents</h2>
+        <ol>
+          <li><a href="#need-preprocessing">3.1 Need for Preprocessing</a></li>
+          <li><a href="#data-cleaning">3.2 Data Cleaning</a></li>
+          <li><a href="#data-integration">3.3 Data Integration</a></li>
+          <li><a href="#data-reduction">3.4 Data Reduction</a></li>
+        </ol>
+      </nav>
+
+      <!-- 3.1 Need for Preprocessing -->
+      <section class="section-card" id="need-preprocessing" aria-labelledby="h-np">
+        <h2 id="h-np"><span class="section-icon">⚙️</span> 3.1 Need for Preprocessing</h2>
+        <div class="definition-box">
+          <strong>Why Preprocess?</strong>
+          Real-world data is <strong>dirty, incomplete, inconsistent, and noisy</strong>. Direct mining of raw data produces poor, unreliable results. Preprocessing transforms data into a form suitable for mining.
+        </div>
+        <p><strong>"Garbage In, Garbage Out"</strong> — the quality of discovered patterns is directly tied to the quality of input data.</p>
+
+        <h3>Tasks in Preprocessing</h3>
+        <ul>
+          <li><strong>Data Cleaning:</strong> Filling missing values, smoothing noisy data, removing outliers.</li>
+          <li><strong>Data Integration:</strong> Merging data from multiple sources into a coherent store.</li>
+          <li><strong>Data Transformation:</strong> Normalization, discretization, concept hierarchy generation.</li>
+          <li><strong>Data Reduction:</strong> Reducing data volume while preserving analytical results (PCA, sampling).</li>
+          <li><strong>Data Discretization:</strong> Replacing continuous values with intervals or categorical values.</li>
+        </ul>
+      </section>
+
+      <!-- 3.2 Data Cleaning -->
+      <section class="section-card" id="data-cleaning" aria-labelledby="h-dc">
+        <h2 id="h-dc"><span class="section-icon">🧹</span> 3.2 Data Cleaning</h2>
+        <p>Data cleaning (or data cleansing) deals with detecting and correcting corrupt or inaccurate records.</p>
+
+        <h3>Missing Values</h3>
+        <p>Missing values arise when data collection fails, fields are inapplicable, or respondents decline to answer.</p>
+        <h4>Strategies to Handle Missing Values</h4>
+        <ul>
+          <li><strong>Ignore the tuple:</strong> Remove records with missing values (only if data is sufficient).</li>
+          <li><strong>Manual filling:</strong> Domain expert fills in values — tedious for large datasets.</li>
+          <li><strong>Global constant:</strong> Replace missing values with a constant like "Unknown" or 0.</li>
+          <li><strong>Attribute mean/median:</strong> Fill with the mean (numeric) or mode (categorical) of the attribute.</li>
+          <li><strong>Class-specific mean:</strong> Use the mean of the same class as the tuple.</li>
+          <li><strong>Most probable value:</strong> Use regression, Bayesian inference, or decision trees to predict and fill.</li>
+        </ul>
+        <div class="example-box">A patient record missing "age" might be filled with the average age of patients with the same diagnosis.</div>
+
+        <h3>Noisy Data</h3>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Noise is a <strong>random error or variance</strong> in a measured variable. Noisy data can obscure true patterns.
+        </div>
+        <h4>Causes of Noise</h4>
+        <ul>
+          <li>Faulty data collection instruments.</li>
+          <li>Human or computer errors at data entry.</li>
+          <li>Transmission errors over networks.</li>
+          <li>Inconsistent naming conventions across sources.</li>
+        </ul>
+
+        <h4>Smoothing Techniques</h4>
+        <ul>
+          <li><strong>Binning:</strong> Sort and partition data into bins; smooth using bin means, medians, or boundaries.</li>
+          <li><strong>Regression:</strong> Fit data to a function (linear/polynomial) to smooth it.</li>
+          <li><strong>Clustering:</strong> Group values; detect outliers that fall outside all clusters.</li>
+          <li><strong>Combined Computer &amp; Human Inspection:</strong> Automated detection + manual verification.</li>
+        </ul>
+        <div class="example-box">Binning example: Values [4, 8, 15, 21, 21, 24, 25, 28, 34] → Bin 1: [4,8,15] → smooth to mean 9.</div>
+
+        <h3>Cleaning Process</h3>
+        <ol>
+          <li><strong>Data Auditing:</strong> Discover rules/relationships, detect violations.</li>
+          <li><strong>Workflow Specification:</strong> Define correction transformations.</li>
+          <li><strong>Workflow Execution:</strong> Apply transformations.</li>
+          <li><strong>Post-processing &amp; Controlling:</strong> Verify cleaned data quality.</li>
+        </ol>
+      </section>
+
+      <!-- 3.3 Data Integration -->
+      <section class="section-card" id="data-integration" aria-labelledby="h-di">
+        <h2 id="h-di"><span class="section-icon">🔗</span> 3.3 Data Integration</h2>
+        <p>Data integration merges data from <strong>multiple heterogeneous sources</strong> into a unified, consistent data store (e.g., a data warehouse).</p>
+
+        <h3>Entity Identification Problem</h3>
+        <p>The same real-world entity may be referred to differently in different databases.</p>
+        <div class="example-box">Customer "John Smith" in one DB and "J. Smith" in another — are they the same person?</div>
+        <p>Solved using <strong>metadata</strong> (data about data) and schema matching.</p>
+
+        <h3>Redundancy &amp; Correlation Analysis</h3>
+        <p>An attribute is redundant if it can be <strong>derived from another attribute</strong>. Redundancy causes data bloat and confusion.</p>
+        <ul>
+          <li><strong>Nominal data:</strong> Chi-square (χ²) test for statistical correlation between attributes.</li>
+          <li><strong>Numeric data:</strong> Pearson's correlation coefficient.</li>
+        </ul>
+        <div class="code-block">Pearson's r = Σ[(xᵢ−x̄)(yᵢ−ȳ)] / [n × σx × σy]
+  r ∈ [−1, 1]
+  r > 0: positive correlation, r < 0: negative, r = 0: no linear correlation</div>
+        <div class="example-box">If "age" and "years of experience" are highly correlated (r ≈ 0.9), one may be removed as redundant.</div>
+
+        <h3>Duplicate Detection</h3>
+        <p>Duplicate tuples are records that represent the <strong>same real-world entity</strong> but appear multiple times (especially after integration from different sources).</p>
+        <ul>
+          <li>Use record linkage techniques and deduplication algorithms.</li>
+          <li>Blocking: group records with same key attributes before comparison.</li>
+        </ul>
+
+        <h3>Conflict Resolution</h3>
+        <p>Attribute values for the same real-world entity may <strong>differ across sources</strong> due to different representations, formats, or scales.</p>
+        <ul>
+          <li>Weight in one system: pounds; in another: kilograms.</li>
+          <li>Currency: USD vs. EUR.</li>
+          <li>Date format: MM/DD/YYYY vs. DD-MM-YYYY.</li>
+        </ul>
+        <p>Resolution strategies: use metadata, establish standards, apply unit conversion, prefer most recent or most reliable source.</p>
+      </section>
+
+      <!-- 3.4 Data Reduction -->
+      <section class="section-card" id="data-reduction" aria-labelledby="h-dr">
+        <h2 id="h-dr"><span class="section-icon">📦</span> 3.4 Data Reduction</h2>
+        <div class="definition-box">
+          <strong>Definition</strong>
+          Data reduction produces a <strong>reduced representation</strong> of the dataset that is much smaller in volume, yet produces the same (or nearly the same) analytical results.
+        </div>
+
+        <h3>Principal Component Analysis (PCA)</h3>
+        <p>PCA reduces <strong>high-dimensional data</strong> by finding a smaller number of dimensions (principal components) that capture maximum variance.</p>
+        <ul>
+          <li>Projects data onto a new lower-dimensional coordinate system.</li>
+          <li>New dimensions are uncorrelated with each other.</li>
+          <li>The first principal component captures the most variance; subsequent ones capture progressively less.</li>
+        </ul>
+        <div class="example-box">A dataset with 100 attributes might be reduced to 10 principal components that capture 95% of the variance, speeding up mining enormously.</div>
+
+        <h3>Attribute Subset Selection</h3>
+        <p>Identifies and removes <strong>irrelevant and redundant attributes</strong> to reduce dimensionality while maintaining predictive accuracy.</p>
+        <ul>
+          <li><strong>Forward selection:</strong> Start with empty set, add the best attribute at each step.</li>
+          <li><strong>Backward elimination:</strong> Start with all attributes, remove the worst at each step.</li>
+          <li><strong>Stepwise selection:</strong> Combine forward and backward.</li>
+          <li><strong>Decision tree induction:</strong> Attributes not appearing in the tree are irrelevant.</li>
+        </ul>
+
+        <h3>Histograms</h3>
+        <p>A histogram approximates a data distribution by <strong>dividing the range into buckets (bins)</strong> and storing a count or sum for each bin, reducing the data to a compact representation.</p>
+        <ul>
+          <li><strong>Equal-width:</strong> Each bin has the same width.</li>
+          <li><strong>Equal-frequency (equi-depth):</strong> Each bin has approximately the same number of values.</li>
+        </ul>
+        <div class="example-box">Instead of storing all 1,000,000 salary records, a histogram with 20 bins summarizes the distribution compactly.</div>
+
+        <h3>Clustering for Reduction</h3>
+        <p>Data can be partitioned into <strong>clusters</strong>; cluster centroids replace individual data points for storage and analysis, significantly reducing volume.</p>
+        <ul>
+          <li>Good for numeric, spatial, or high-dimensional data.</li>
+          <li>Representative data points (medoids or centroids) stand in for the full cluster.</li>
+        </ul>
+      </section>
+
+      <!-- Unit Navigation -->
+      <div class="unit-nav">
+        <a href="unit2.html" class="unit-nav-btn">← Unit 2: Data Concepts</a>
+        <a href="unit4.html" class="unit-nav-btn">Unit 4: Classification →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">▲</button>
+
+  <footer>
+    <p>📊 Data Mining Study Guide &mdash; Unit 3 &copy; 2024 | <a href="index.html">Home</a></p>
+  </footer>
+
+</body>
+</html>
